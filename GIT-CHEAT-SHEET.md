@@ -1,10 +1,12 @@
 ## Before you start coding
 Checkout to the *main* branch and run the  
 > git pull
+
 command to get the latest changes. 
 
 Now, you want to create a new branch to work on. Run 
 > git checkout -b <branch-name> 
+  
 to create a new branch and switch to it from main. Replace <branch-name> with something readable like *my-feature* 
 
 Now you can start coding!
@@ -12,6 +14,7 @@ Now you can start coding!
 ## Committing your changes and additions
 Firstly, run the basic
 > git status
+
 command to see the all the files that you have changed. 
 
 If you want to add all of them to the upcoming commit, simply run 
@@ -19,6 +22,7 @@ If you want to add all of them to the upcoming commit, simply run
 
 Otherwise, individual files can be added with
 > git add <file-name>
+  
 and removed if wrongfully added with
 > git remove <file-name>
 
@@ -36,6 +40,7 @@ If there is a conflict happening after doing the pull, then **read section "Merg
 
 Now. you should be able to simply run:
 > git push --set-upstream origin <branch-name>
+  
 to push this change to GitHub. This is still not a part of the main-branch, so you will need to create a *Pull-request*.
 
 ## Merge changes from main to your branch 
@@ -55,6 +60,7 @@ The returned prompt should say that you have unmerged paths. This is ok, you hav
 **Note!** 
 If a long text prompt appears, them simply press *Esc* followed by
 > :wq
+
 and hit *Enter*. This will complete the commit.
 
 Return to **Pushing your changes to GitHub**.
