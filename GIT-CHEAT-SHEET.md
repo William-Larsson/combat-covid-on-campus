@@ -52,7 +52,7 @@ Now you should be able to simply run:
 to push this update to GitHub. This is still not a part of the *main* branch, so you will need to create a *Pull-request*.
 
 ## Merge changes from main to your branch 
-*Main* has changes and there are possible conflicts. This means that the some lines of code may have been changed in *main* since your last pull, and you have made changes to those same lines too. 
+*Main* has changes and there are possible conflicts. A conflict means that the some lines of code have been changed in *main* since your last pull and you have made changes to those same lines too. 
 
 Begin merging by checkout to your branch
 > git checkout \<branch-name\>
