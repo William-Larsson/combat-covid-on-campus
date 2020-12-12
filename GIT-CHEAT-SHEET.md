@@ -5,7 +5,7 @@ Checkout to the *main* branch and run the
 command to get the latest changes. 
 
 Now, you want to create a new branch to work on. Run 
-> git checkout -b <branch-name> 
+> git checkout -b \<branch-name\> 
   
 to create a new branch and switch to it from main. Replace <branch-name> with something readable like *my-feature* 
 
