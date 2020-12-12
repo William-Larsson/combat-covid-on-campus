@@ -21,10 +21,10 @@ If you want to add all of them to the upcoming commit, simply run
 > git add .
 
 Otherwise, individual files can be added with
-> git add <file-name>
+> git add \<file-name\>
   
 and removed if wrongfully added with
-> git remove <file-name>
+> git remove \<file-name\>
 
 After the files have been added, they can be committed with
 > git commit -m "An example commit message"
@@ -39,7 +39,7 @@ Do a pull to make sure that main hasn't changed since your last pull
 If there is a conflict happening after doing the pull, then **read section "Merge changes from main to your branch". Return here afterwards. 
 
 Now. you should be able to simply run:
-> git push --set-upstream origin <branch-name>
+> git push --set-upstream origin \<branch-name\>
   
 to push this change to GitHub. This is still not a part of the main-branch, so you will need to create a *Pull-request*.
 
