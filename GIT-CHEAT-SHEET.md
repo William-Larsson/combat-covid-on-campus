@@ -53,6 +53,7 @@ When the conflicts are resolved, let's
 
 The returned prompt should say that you have unmerged paths. This is ok, you have already solved this, so now you should commit that solution. 
 > git add . 
+
 > git commit 
 
 **Note!** 
