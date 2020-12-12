@@ -1,18 +1,23 @@
 ## Before you start coding
-Checkout to the *main* branch and run the  
+Make sure that you are on the *main* branch and run the  
 > git pull
 
 command to get the latest changes. 
 
+If not, run
+> git checkout main
+
+before doing the pull to switch branch to *main*. 
+
 Now, you want to create a new branch to work on. Run 
 > git checkout -b \<branch-name\> 
   
-to create a new branch and switch to it from *main*. Replace \<branch-name\> with something readable like *my-feature* 
+to create a new branch and switch to it from *main*. Replace \<branch-name\> with something readable like *my-feature*. 
 
 Now you can start coding!
 
 ## Committing your changes and additions
-Firstly, run the basic
+Firstly, from your branch, run the basic
 > git status
 
 command to see the all the files that you have changed. 
@@ -30,28 +35,37 @@ After the files have been added, they can be committed with
 > git commit -m "An example commit message"
 
 ## Pushing your changes to GitHub
-Begin by switching branch to the *main* branch
+Begin by switching from the branch you want to push to the *main* branch
 > git checkout main
 
-Do a pull to make sure that main hasn't changed since your last pull
+Do a pull to make sure that *main* hasn't changed since your last pull
 > git pull
 
-If there is a conflict happening after doing the pull, then read section **Merge changes from main to your branch**. Return here afterwards. 
+If *main* has changed since your last the pull, then read section **Merge changes from main to your branch**. Return here afterwards.
 
-Now. you should be able to simply run:
+Return to your branch so the changes can be pushed
+> git checkout \<branch-name\>
+
+Now you should be able to simply run:
 > git push --set-upstream origin \<branch-name\>
   
-to push this change to GitHub. This is still not a part of the *main* branch, so you will need to create a *Pull-request*.
+to push this update to GitHub. This is still not a part of the *main* branch, so you will need to create a *Pull-request*.
 
 ## Merge changes from main to your branch 
-A conflict has happened, which means that the some lines of code has been changed in *main* since your last pull, and you have made changes to those same lines too. 
+*Main* has changes and tehre are possible conflicts. This means that the some lines of code may have been changed in *main* since your last pull, and you have made changes to those same lines too. 
 
-You need to resolve all the conflicts. This process can be different in different tools/editors. 
+Begin merging by checkout to your branch
+> git checkout \<branch-name\>
+
+Now, merge your branch with *main* by executing
+> git merge main
+
+Git may be able to auto-merge the changes if there are no conflicts. If not, you need to resolve all the conflicts manually. This process can be different in different tools/editors. 
 
 When the conflicts are resolved, let's 
 > git status
 
-The returned prompt should say that you have unmerged paths. This is ok, you have already solved this, so now you should commit that solution. 
+The returned prompt should say that you have unmerged paths. This is ok, you have already solved this issue, so now you should commit that solution. 
 > git add . 
 
 > git commit 
