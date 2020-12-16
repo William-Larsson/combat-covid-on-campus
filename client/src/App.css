@@ -35,4 +35,17 @@
   to {
     transform: rotate(360deg);
   }
+
+  poidata { 
+    border-left: 1px solid rgb(230, 230, 230); 
+    width: 50%; 
+    position: absolute; 
+    right: 0px; 
+    top: 0px; 
+    height: 100%; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    overflow: auto;
+  }
+  
 }
