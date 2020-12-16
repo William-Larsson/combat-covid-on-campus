@@ -53,7 +53,7 @@ router.get('/axios/today', function(req, res, next){
   //console.log('date ' + date.toISOString().split('T')[0]);
 
   axios.get('https://daresay-dev.eu-gb.cf.appdomain.cloud/innovativa/A81758FFFE03BC34/' 
-    + date.toISOString().split('T')[0] + '/'+ date2.toISOString().split('T')[0] + '/1/139kTnm10ksR'
+    + date.toISOString().split('T')[0] + '/'+ date2.toISOString().split('T')[0] + '/10/139kTnm10ksR'
   ).then(response => {
     console.log(response.data);
     res.send('axios success');
