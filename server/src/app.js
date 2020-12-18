@@ -26,6 +26,7 @@ db.once('open', () => console.log('Connected to db'));
 app.use(cors());
 app.use(express.json());
 app.use('/api', require('../routes/api'));
+app.use('/db', require('../routes/filldb'));
 
 //error handling from db
 app.use(function(err, req, res, next){
