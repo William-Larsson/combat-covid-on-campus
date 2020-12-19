@@ -6,7 +6,6 @@
 
 
 # VSCode & Visual Studio
-.vscode/
 .vscode-test
 vs/
 .project
