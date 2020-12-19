@@ -1,0 +1,21 @@
+// Compile SCSS-code to CSS by running the "Live Sass compiler"
+// The "settings.json" file in ".vscode" folder will place the compiled 
+// file in "styles/compiled" folder for use in HTML.
+
+body { 
+    margin:0px;
+    margin-top: 50px;
+    padding:0px; 
+    width: 100%; 
+    height:100%; 
+}
+    
+
+#map {
+    margin-top: 100px;
+}
+
+p {
+    text-decoration: underline;
+    color: chocolate;
+}
