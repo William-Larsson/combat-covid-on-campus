@@ -125,3 +125,15 @@ function placePOIMarker(poi){
     }
     myMap.flyTo({center: lngLat, zoom: 19, speed: 0.5});
 }
+
+// Ev. fixa så det går att slå på och av?
+myMap.on('load', function(){
+    var lngLat = myMap.getCenter();
+    var marker = new Mazemap.MazeMarker( {
+        shape: 'circle',
+        color: 'red',
+        size: 36,
+        zLevel: 1
+    })
+    .setLngLat( lngLat ).addTo(myMap);
+});
