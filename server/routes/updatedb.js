@@ -26,7 +26,7 @@ router.put('/sensor/sensorid/:sensorid', function(req, res, next){
   }).catch(next);
 });
 
-//updates latest value of all sensors
+//updates by only using the latest value of all sensors
 router.get('/sensor/all/now', function(req, res, next){
   //fetch list on sensor names from db
   console.log('updating all sensors');
@@ -68,7 +68,9 @@ router.get('/sensor/all/now', function(req, res, next){
             timestamp: response.data[0].time
           }).then(function(){
             console.log('updated sensor ' +  sensor.name);
-          }).catch(next);
+          }).catch(next => {
+            console.log('failed to update sensor ' +  sensor.name);
+          });
            
         }
         
@@ -82,6 +84,9 @@ router.get('/sensor/all/now', function(req, res, next){
     res.send({type: 'success'});
   }).catch(next);
 });
+
+
+/*TODO node BB9B does not update properly, but BB36 updates twice*/
 
 //updates heat for last 10 hours of all sensors
 //TODO does not adjust for day change
@@ -113,11 +118,8 @@ router.get('/sensor/all', function(req, res, next){
              *response.pir ===  --> heat = 0
              *response.pir >= 8 --> heat = 5
              */
-              let heat = Math.floor(response.data[j].dd.pir /1.6); //1.6 = Each person's risk value 8/5
-            
-              if(heatValue > 5) {
-                heatValue = 5;
-              }
+              heat = Math.floor(response.data[j].dd.pir /1.6); //1.6 = Each person's risk value 8/5
+
             //add reduction over time
             /*
              *<1h ago --> time modifier x1
@@ -127,18 +129,26 @@ router.get('/sensor/all', function(req, res, next){
               let time = new Date(response.data[j].time);
               let now = new Date(parseInt(Date.now()));
               //hour now - hour sample
-              console.log('now: ' + now.getHours() + ' and time: ' + time.getHours());
+              //console.log('now: ' + now.getHours() + ' and time: ' + time.getHours());
               let timedifference = now.getHours() - time.getHours();
-              console.log('now: ' + now.getHours() + ' and time: ' + time.getHours() + ' modifier: ' + timedifference);
+              //console.log('now: ' + now.getHours() + ' and time: ' + time.getHours() + ' modifier: ' + timedifference);
               let timemodifier = 0;
-              if (timedifference < 8) {
-                //TODO check if fine if timediff === 0
-                let timemodifier = 1/(timedifference+1);
-              } 
+              if (timedifference < 8 && timedifference > 0) {
+                //TODO work on this formula to make it better
+                timemodifier = 1/(timedifference);
+              } else if (timedifference === 0) {
+                timemodifier = 1;
+              }
+            console.log('heat ' + heat + 'timemod ' + timemodifier);
              heat = Math.ceil(heat*timemodifier);
+             //console.log(' Pir: ' + response.data[j].dd.pir + ' timemodifier: ' + timemodifier);
              console.log('heat value: ' + heat);
+             if(heat > 5) {
+                heat = 5;
+              }
 
              //sets largest heat impact
+             console.log('heat ' + heat + 'heatV ' + heatValue);
               heatValue = Math.max(heatValue, heat);
               //console.log('pir value ' + response.data[j].dd.pir + ' and heatV ' + heat);
 
@@ -154,12 +164,12 @@ router.get('/sensor/all', function(req, res, next){
             heatValue: heatValue,
             timestamp: response.data[0].time
           }).then(function(){
-            console.log('updated sensor ' +  sensor.name);
-          }).catch(next);
-           
+            console.log('updated sensor ' +  sensor.name + ' with heat: ' + heatValue);
+          }).catch(next => {
+            console.log('failed to update sensor ' +  sensor.name);
+          });        
         }
         
-
         //res.send('axios success');
       }).catch((error) => {
         console.log(error) //Logs a string: Error: Request failed with status code 404
