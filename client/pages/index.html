@@ -17,12 +17,23 @@
 
     <!-- Page styles / scripts -->
     <link rel="stylesheet" href="../styles/compiled/index.min.css"> <!-- NOTE the filepath! -->
+    <link rel="stylesheet" href="../styles/compiled/style_id.min.css"> <!-- NOTE the filepath! -->
     <script defer type='text/javascript' src='../scripts/index.js'></script>
 
 </head>
 <body>
-    <p id="test">Yay!!</p>
-    <div id="map" class="mazemap"></div>
-    
+    <div class="wrapper">
+        <!-- TODO do we need map_wrapper-->
+        <div class="wrapper_map">    
+            <div id="map" class="mazemap"></div>
+        </div>
+    <!---->
+        <div id="btn_search" class="button search_btn">
+            <!--add img here -->
+            <img class="btn_icon" src="walk_48dp.png" alt="walk icon">
+            
+        </div>
+    </div>
+
 </body>
 </html>

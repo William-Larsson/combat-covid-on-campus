@@ -139,7 +139,7 @@ router.get('/sensor/all', function(req, res, next){
               } else if (timedifference === 0) {
                 timemodifier = 1;
               }
-            console.log('heat ' + heat + 'timemod ' + timemodifier);
+             console.log('heat ' + heat + 'timemod ' + timemodifier);
              heat = Math.ceil(heat*timemodifier);
              //console.log(' Pir: ' + response.data[j].dd.pir + ' timemodifier: ' + timemodifier);
              console.log('heat value: ' + heat);
