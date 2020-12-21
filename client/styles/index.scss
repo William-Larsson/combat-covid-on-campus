@@ -1,21 +1,55 @@
 // Compile SCSS-code to CSS by running the "Live Sass compiler"
-// The "settings.json" file in ".vscode" folder will place the compiled 
+// The "settings.json" file in ".vscode" folder will place the compiled
 // file in "styles/compiled" folder for use in HTML.
 
-body { 
-    margin:0px;
-    margin-top: 50px;
-    padding:0px; 
-    width: 100%; 
-    height:100%; 
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
 }
-    
+body div {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
 
-#map {
-    margin-top: 100px;
+.btn_icon {
+  width: 100%;
+}
+
+.button {
+  border-radius: 50%;
+  width: 2em;
+  height: 2em;
+  display: block;
+  background-color: black;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.search_btn {
+  grid-row-start: 1;
+  z-index: 2;
+  justify-self: end;
+  align-self: end;
 }
 
 p {
-    text-decoration: underline;
-    color: chocolate;
+  text-decoration: underline;
+  color: chocolate;
+}
+
+.wrapper {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+}
+
+.wrapper_map {
+  grid-row-start: 1;
 }

@@ -1,15 +1,18 @@
 /**
  * Axios test -- make sure it works when Daresay API is running again
  */
-function TestAxios() {
-    axios.get('https://daresay-dev.eu-gb.cf.appdomain.cloud/innovativa/A81758FFFE03BC34/2020-11-01/2020-11-10/1/139kTnm10ksR')
+function fetchSensorData() {
+    const data = axios.get('http://localhost:8081/api/sensordata')
     .then(response => {
-        console.log("Axios get success!! ");
+        // console.log(response);
+        response.data.forEach(item => {
+            placeSensorMarker(item);
+        })
     }).catch(error => {
         console.log(error);
     }); 
 }
-TestAxios();
+fetchSensorData();
 
 // Define global map marker
 var mazeMarker;
@@ -126,14 +129,38 @@ function placePOIMarker(poi){
     myMap.flyTo({center: lngLat, zoom: 19, speed: 0.5});
 }
 
-// Ev. fixa så det går att slå på och av?
-myMap.on('load', function(){
-    var lngLat = myMap.getCenter();
-    var marker = new Mazemap.MazeMarker( {
+function placeSensorMarker(data){
+    var lngLat = {lng: data.LAT, lat: data.LONG}; // TODO: Kom ihåg att byta plats
+    var color;
+    
+    switch(data.heatValue) {
+        case 0: 
+            color = 'white';
+            break;
+        case 1:
+            color = 'blue';
+            break;
+        case 2:
+            color = 'coral';
+            break;
+        case 3:
+            color = 'hotpink';
+            break;
+        case 4:
+            color = 'orange';
+            break;
+        case 5:
+            color = 'red';
+            break;
+        default:
+            color = 'white';   
+    }
+
+    new Mazemap.MazeMarker( {
         shape: 'circle',
-        color: 'red',
+        color: color,
         size: 36,
-        zLevel: 1
+        zLevel: data.floor - 1
     })
     .setLngLat( lngLat ).addTo(myMap);
-});
+}
