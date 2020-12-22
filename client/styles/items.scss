@@ -1,0 +1,58 @@
+// Compile SCSS-code to CSS by running the "Live Sass compiler"
+// The "settings.json" file in ".vscode" folder will place the compiled
+// file in "styles/compiled" folder for use in HTML.
+
+.heat_btn {
+    justify-self: end;
+    align-self: start;
+    margin-right: 3em;
+    margin-top: 2em;
+    grid-row-start: 1;
+    grid-column-end: 2;
+  }
+
+  .modal_intro {
+    display:grid;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end:2;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    justify-items: center;
+    background-color: #fff;
+    z-index: 1000;
+    padding: 2em;
+  }
+
+  .modal_btn {
+      background-color: rgb(71, 81, 114);
+      color: #fff;
+      padding: 2em;
+      border-radius: 10%;
+      font-weight: bold;
+  }
+  
+  .modal_intro.closed {
+    display: none;
+  }
+  
+  .route_btn {
+    justify-self: start;
+    align-self: start;
+    margin-left: 1em;
+    margin-top: 2em;
+    grid-row-start: 1;
+    grid-column-start: 1;
+  }
+  .search_btn {
+    justify-self: end;
+    align-self: end;
+    margin-right: 1em;
+    margin-bottom: 2em;
+    grid-row-end: 2;
+    grid-column-end: 2;
+  }
+
+  
