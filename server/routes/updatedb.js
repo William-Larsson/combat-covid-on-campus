@@ -53,8 +53,8 @@ router.get('/sensor/all/now', function(req, res, next){
           *response.pir >= 8 --> heat = 5
           */
            let heatValue = Math.floor(response.data[0].dd.pir /1.6); //1.6 = Each person's risk value 8/5
-           console.log('loop nr ' + i + ' and sensor ' + sensor.name);
-           console.log('pir value ' + response.data[0].dd.pir + ' and heatV ' + heatValue);
+           //console.log('loop nr ' + i + ' and sensor ' + sensor.name);
+           //console.log('pir value ' + response.data[0].dd.pir + ' and heatV ' + heatValue);
 
            //console.log('res: ' + response.data[0]);
 
@@ -122,7 +122,7 @@ router.get('/sensor/all', function(req, res, next){
 
             //add reduction over time
             /*
-             *<1h ago --> time modifier x1
+             *=<1h ago --> time modifier x1
              *>8h ago --> time modifier x0
              */
 
@@ -139,16 +139,16 @@ router.get('/sensor/all', function(req, res, next){
               } else if (timedifference === 0) {
                 timemodifier = 1;
               }
-            console.log('heat ' + heat + 'timemod ' + timemodifier);
+            //console.log('heat ' + heat + 'timemod ' + timemodifier);
              heat = Math.ceil(heat*timemodifier);
              //console.log(' Pir: ' + response.data[j].dd.pir + ' timemodifier: ' + timemodifier);
-             console.log('heat value: ' + heat);
+             //console.log('heat value: ' + heat);
              if(heat > 5) {
                 heat = 5;
               }
 
              //sets largest heat impact
-             console.log('heat ' + heat + 'heatV ' + heatValue);
+             //console.log('heat ' + heat + 'heatV ' + heatValue);
               heatValue = Math.max(heatValue, heat);
               //console.log('pir value ' + response.data[j].dd.pir + ' and heatV ' + heat);
 
