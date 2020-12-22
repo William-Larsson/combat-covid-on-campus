@@ -31,7 +31,7 @@ var mapOptions = {
     // initial position in lngLat format
     center: {lng: 20.30770244572698, lat: 63.81948724118865},
     zoom: 17,
-    zLevel: 1,
+    zLevel: 2,
     scrollZoom: true,
     doubleClickZoom: false,
     touchZoomRotate: false
@@ -135,25 +135,25 @@ function placeSensorMarker(data){
     
     switch(data.heatValue) {
         case 0: 
-            color = 'white';
+            color = '#FFF8DE';
             break;
         case 1:
-            color = 'blue';
+            color = '#FFF33B';
             break;
         case 2:
-            color = 'coral';
+            color = '#FDC70C';
             break;
         case 3:
-            color = 'hotpink';
+            color = '#F3903F';
             break;
         case 4:
-            color = 'orange';
+            color = '#ED683C';
             break;
         case 5:
-            color = 'red';
+            color = '#E93E3A';
             break;
         default:
-            color = 'white';   
+            color = '#FFF8DE';   
     }
 
     new Mazemap.MazeMarker( {
