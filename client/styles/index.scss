@@ -2,12 +2,14 @@
 // The "settings.json" file in ".vscode" folder will place the compiled
 // file in "styles/compiled" folder for use in HTML.
 
+//TODO adjust vh for mobile (like andriod)
+
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background-color: red;
+  background-color: rgb(102, 107, 116);
 }
 body > div {
   margin: 0;
@@ -18,15 +20,28 @@ body > div {
   width: 100%;
 }
 
-.button {
-  border-radius: 50%;
+.btn_large {
   width: 4em;
   height: 4em;
+}
+
+.btn_small {
+  width: 3em;
+  height: 3em;
+}
+
+.button {
+  border-radius: 50%;
   display: block;
-  background-color: black;
+  box-shadow: 2px 2px 10px grey;
   align-items: center;
   justify-content: center;
   margin: 0;
+  z-index: 2;
+}
+
+.button > img {
+  border-radius: 50%;
 }
 
 
@@ -34,11 +49,6 @@ body > div {
   width:auto;
   height: auto;
   z-index: 1;
-}
-.search_btn {
-  z-index: 2;
-  justify-self: end;
-  align-self: end;
 }
 
 p {
@@ -49,8 +59,8 @@ p {
 .wrapper {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  gap: 2em;
+  grid-template-rows: 100vh;
+  gap: 0;
   height: 100vh;
 }
 

@@ -12,30 +12,52 @@
     <script type='text/javascript' src="../node_modules/axios/dist/axios.min.js"></script>
 
     <!-- MazeMap API -->
-    <link rel="stylesheet" href="https://api.mazemap.com/js/v2.0.0-beta.11/mazemap.min.css">
-    <script defer type='text/javascript' src='https://api.mazemap.com/js/v2.0.0-beta.11/mazemap.min.js'></script>
+    <link rel="stylesheet" href="https://api.mazemap.com/js/v2.0.40/mazemap.min.css">
+    <script defer type='text/javascript' src='https://api.mazemap.com/js/v2.0.40/mazemap.min.js'></script>
 
     <!-- Page styles / scripts -->
     <link rel="stylesheet" href="../styles/compiled/index.min.css"> <!-- NOTE the filepath! -->
-    <link rel="stylesheet" href="../styles/compiled/style_id.min.css"> <!-- NOTE the filepath! -->
+    <link rel="stylesheet" href="../styles/compiled/items.min.css"> <!-- NOTE the filepath! -->
+    <link rel="stylesheet" href="../styles/compiled/resize.min.css"> <!-- NOTE the filepath! -->
     <script defer type='text/javascript' src='../scripts/index.js'></script>
 
 </head>
 <body>
     
     <div class="wrapper">
+       <!-- TODO Intro pop up?-->
+       <!--<div class="modal_intro" id="modal_intro">
+            <h3>Safe on campus</h3>
+            <p>Text... This map visualizes... </p>
+            <div class="modal_btn" id="modal_btn">
+                <div class="modal_btntext" id="modal_btntext"></div>
+
+            </div>
+        
+        </div>
+        -->
         <!-- TODO do we need map_wrapper-->
         <div class="wrapper_map">               
             <div id="map" class="mazemap"></div>            
         </div>
-    <!---->
-        <div id="btn_search" class="button search_btn">
-            <!--add img here 
-            <img class="btn_icon" src="../img/walk_48dp.png" alt="walk icon">
-            -->
-            
+        <!--toggles safest vs shortes route-->
+        <div id="btn_route" class="button route_btn btn_small"> 
+            <img class="btn_icon" src="../img/route.jpg" alt="route type icon">
+        </div>
+        <!--toggles heat map on/off-->
+        <div id="btn_heat" class="button heat_btn  btn_small"> 
+            <img class="btn_icon" src="../img/fire.jpg" alt="heat icon">
+        </div>
+        <!--search placement marker-->
+        <div id="btn_search" class="button search_btn btn_large"> 
+            <img class="btn_icon" src="../img/poi.jpg" alt="walk icon">
         </div>
     </div>
+
+
+<script>
+    
+</script>
 
 </body>
 </html>

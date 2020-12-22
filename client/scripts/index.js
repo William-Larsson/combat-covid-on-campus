@@ -164,3 +164,43 @@ function placeSensorMarker(data){
     })
     .setLngLat( lngLat ).addTo(myMap);
 }
+
+var routeController;
+var start = { lngLat: {lng: 20.30770244572698, lat: 63.81948724118865}, zLevel: 0};
+var dest = { lngLat: {lng: 20.307079, lat: 63.819508}, zLevel: 2};
+
+
+myMap.on('load', function(){
+
+    routeController = new Mazemap.RouteController(myMap, {
+        routeLineColorPrimary: '#0099EA',
+        routeLineColorSecondary: '#888888'
+    });
+    setRoute(start, dest);
+});
+
+function setRoute( start, dest ){
+    routeController.clear(); // Clear existing route, if any
+
+    Mazemap.Data.getRouteJSON(start, dest)
+    .then(function(geojson){
+        console.log('@ geojson', geojson);
+        routeController.setPath(geojson);
+        var bounds = Mazemap.Util.Turf.bbox(geojson);
+        myMap.fitBounds( bounds, {padding: 100} );
+    });
+}
+
+/**
+ * Get user gps location from the browser
+ */
+navigator.geolocation.getCurrentPosition((location) => {
+    console.log(`Lat: ${location.coords.latitude} , lng: ${location.coords.longitude}`)
+    var userPosition = {lng: location.coords.longitude, lat: location.coords.latitude};
+
+    var blueDot = new Mazemap.BlueDot( {
+        zLevel: 1,
+        accuracyCircle: true
+    } ).setLngLat( userPosition ).setAccuracy(10).addTo(myMap);
+
+})
