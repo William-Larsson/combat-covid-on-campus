@@ -10,7 +10,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: rgb(102, 107, 116);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 body > div {
   margin: 0;
@@ -24,6 +24,7 @@ body > div {
 .btn_large {
   width: 4em;
   height: 4em;
+  line-height: 1em;
 }
 
 .btn_small {
@@ -32,13 +33,17 @@ body > div {
 }
 
 .button {
-  border-radius: 50%;
+  border-radius: 7px;
   display: block;
-  box-shadow: 2px 2px 10px grey;
+  box-shadow: 0px 2px 10px grey;
   align-items: center;
   justify-content: center;
   margin: 0;
   z-index: 2;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #067DEF;
+  font-weight: bold;
 }
 
 .button > img {

@@ -26,16 +26,17 @@
     
     <div class="wrapper">
        <!-- TODO Intro pop up?-->
-       <!--<div class="modal_intro" id="modal_intro">
-            <h3>Safe on campus</h3>
-            <p>Text... This map visualizes... </p>
-            <div class="modal_btn" id="modal_btn">
-                <div class="modal_btntext" id="modal_btntext"></div>
-
+       <div class="modal_intro" id="modal_intro">
+            <h3>Safe on Campus</h3>
+            <p>This map visualizes potential crowded areas at campus. It is only to be used as a guide and cannot guarantee that all riskvalues are correct. <br><br><b><i>Keep safe distance at all times!</i></b><br></p>
+            <div class="modal_btn button btn_small" id="modal_btn">
+                <div class="modal_btntext" id="modal_btntext" onclick="hideModal()">
+                    <p>OK</p>
+                </div>
             </div>
         
         </div>
-        -->
+        
         <!-- TODO do we need map_wrapper-->
         <div class="wrapper_map">               
             <div id="map" class="mazemap"></div>            
@@ -54,6 +55,14 @@
             <!--<img class="btn_icon" src="../img/poi.jpg" alt="walk icon">-->
         </div>
     </div>
+
+    <!-- toggles intro btn-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function hideModal() {
+            $("#modal_intro").toggle();
+        }
+    </script>
 
 </body>
 </html>
