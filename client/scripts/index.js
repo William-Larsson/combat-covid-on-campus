@@ -1,5 +1,14 @@
+// Define global map marker
+var mazeMarker;
+var userPosition;
+var routeController;
+var start = { lngLat: {lng: 20.30770244572698, lat: 63.81948724118865}, zLevel: 0};
+var dest = { lngLat: {lng: 20.307079, lat: 63.819508}, zLevel: 2};
+
+
 /**
- * Axios test -- make sure it works when Daresay API is running again
+ * Fetch LoRa sensor data from server and place data-points for 
+ * each sensor on screen
  */
 function fetchSensorData() {
     const data = axios.get('http://localhost:8081/api/sensordata')
@@ -14,12 +23,9 @@ function fetchSensorData() {
 }
 fetchSensorData();
 
-// Define global map marker
-var mazeMarker;
-
 
 /**
- * Map options and initial state
+ * MazeMap options and initial state
  */
 var mapOptions = {
     // container id specified in the HTML
@@ -31,7 +37,7 @@ var mapOptions = {
     // initial position in lngLat format
     center: {lng: 20.30770244572698, lat: 63.81948724118865},
     zoom: 17,
-    zLevel: 2,
+    zLevel: 1,
     scrollZoom: true,
     doubleClickZoom: false,
     touchZoomRotate: false
@@ -74,23 +80,25 @@ myMap.on('load', function(){
  * @param {*} e = the event
  */
 function onMapClick(e){
-    clearPOIMarker();
-
     var lngLat = e.lngLat;
     var zLevel = myMap.zLevel;
 
     // Fetching via Data API
     Mazemap.Data.getPoiAt(lngLat, zLevel)
         .then(poi => {
-            console.log('Found poi', poi);
+            // console.log(poi)
             // printPOIData(poi);
             placePOIMarker(poi);
-        }).catch(() => false);
+            document.getElementById('btn_search').style.display = "block";
+        }).catch(error => {
+            document.getElementById('btn_search').style.display = "none";
+        })
 }
 
 
 /**
- * Removes existing map marker from map view
+ * Removes existing map marker and 
+ * clears the highlighted "room" from map view  
  */
 function clearPOIMarker(){
     if(mazeMarker){
@@ -105,7 +113,7 @@ function clearPOIMarker(){
  * @param {*} poi = point of interest (click location)
  */
 function placePOIMarker(poi){
-
+    clearPOIMarker();
     // Get a center point for the POI, because the data can 
     //return a polygon instead of just a point sometimes
     var lngLat = Mazemap.Util.getPoiLngLat(poi);
@@ -127,10 +135,16 @@ function placePOIMarker(poi){
         myMap.highlighter.highlight(poi);
     }
     myMap.flyTo({center: lngLat, zoom: 19, speed: 0.5});
+    
 }
 
+
+/**
+ * Place the "heat-map" circles on the map
+ * @param {LAT: float, LNG: float, heatValue: int} data 
+ */
 function placeSensorMarker(data){
-    var lngLat = {lng: data.LAT, lat: data.LONG}; // TODO: Kom ihåg att byta plats
+    var lngLat = {lng: data.LAT, lat: data.LONG}; // TODO: Change lat and lng when database is fixed.
     var color;
     
     switch(data.heatValue) {
@@ -165,42 +179,65 @@ function placeSensorMarker(data){
     .setLngLat( lngLat ).addTo(myMap);
 }
 
-var routeController;
-var start = { lngLat: {lng: 20.30770244572698, lat: 63.81948724118865}, zLevel: 0};
-var dest = { lngLat: {lng: 20.307079, lat: 63.819508}, zLevel: 2};
 
-
+/**
+ * When the map has loaded, instantiate a route controller 
+ * that can be used to paint a route between two points on the map
+ */
 myMap.on('load', function(){
-
     routeController = new Mazemap.RouteController(myMap, {
         routeLineColorPrimary: '#0099EA',
         routeLineColorSecondary: '#888888'
     });
-    setRoute(start, dest);
 });
 
+
+/**
+ * Paint a route on the map between two points on the map
+ * Can be either objects with lngLat & z-level or a poiID. 
+ * @param {lngLat: {lng: float, lat: float}, zLevel: int} start 
+ * @param {lngLat: {lng: float, lat: float}, zLevel: int} dest 
+ */
 function setRoute( start, dest ){
     routeController.clear(); // Clear existing route, if any
 
     Mazemap.Data.getRouteJSON(start, dest)
     .then(function(geojson){
-        console.log('@ geojson', geojson);
+        // console.log('@ geojson', geojson);
         routeController.setPath(geojson);
         var bounds = Mazemap.Util.Turf.bbox(geojson);
         myMap.fitBounds( bounds, {padding: 100} );
-    });
+    })
+    .catch((error) => console.log(error));
 }
 
+
 /**
- * Get user gps location from the browser
+ * Get user GPS location from the browser if the user 
+ * gives us permission to access it. 
  */
 navigator.geolocation.getCurrentPosition((location) => {
     console.log(`Lat: ${location.coords.latitude} , lng: ${location.coords.longitude}`)
-    var userPosition = {lng: location.coords.longitude, lat: location.coords.latitude};
+    userPosition = {lngLat: {lng: location.coords.longitude, lat: location.coords.latitude}, zlevel: 0}
 
-    var blueDot = new Mazemap.BlueDot( {
+    var blueDot = new Mazemap.BlueDot({
         zLevel: 1,
         accuracyCircle: true
-    } ).setLngLat( userPosition ).setAccuracy(10).addTo(myMap);
-
+    })
+    .setLngLat(userPosition.lngLat)
+    .setAccuracy(10)
+    .addTo(myMap);
 })
+
+
+/**
+ * Route button from HTML onclick func. 
+ */
+document.getElementById('btn_search').onclick = () => {
+    if (mazeMarker) {
+        const destPosition = {lngLat: mazeMarker._lngLat, zLevel: mazeMarker.options.zLevel};
+        //console.log(`User pos: ${userPosition} \nDest pos: ${destPosition}`);
+        setRoute(userPosition, destPosition);
+        document.getElementById('btn_search').style.display = "none";
+    }
+}

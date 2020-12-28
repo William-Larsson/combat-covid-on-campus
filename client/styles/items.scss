@@ -9,6 +9,7 @@
     margin-top: 2em;
     grid-row-start: 1;
     grid-column-end: 2;
+    display: none;
   }
 
   .modal_intro {
@@ -45,14 +46,17 @@
     margin-top: 2em;
     grid-row-start: 1;
     grid-column-start: 1;
+    display: none;
   }
+
   .search_btn {
+    background-color: #fff;
     justify-self: end;
     align-self: end;
     margin-right: 1em;
     margin-bottom: 2em;
     grid-row-end: 2;
     grid-column-end: 2;
+    display: none;
+    text-align: center;
   }
-
-  
